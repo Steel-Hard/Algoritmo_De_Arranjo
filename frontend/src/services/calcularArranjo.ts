@@ -1,9 +1,9 @@
 import { instance } from "./index";
 
 class CalcularArranjo {
-  static async obterArranjo(array: number[]) {
+  static async obterArranjo(array: number[],tamanho:number) {
     try {
-      const {data} = await instance.post("/calcular", { arr: array });
+      const {data} = await instance.post("/", { arr: array,tamanho});
       return data;
       
     } catch (err) {

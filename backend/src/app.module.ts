@@ -3,12 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TesteController } from './teste/teste.controller';
 import { TesteService } from './teste/teste.service';
-import { HeapController } from './heap/heap.controller';
-import { HeapService } from './heap/heap.service';
 
 @Module({
   imports: [],
-  controllers: [AppController, TesteController, HeapController],
-  providers: [AppService, TesteService, HeapService],
+  controllers: [AppController, TesteController],
+  providers: [AppService, TesteService],
 })
 export class AppModule {}

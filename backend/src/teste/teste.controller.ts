@@ -8,10 +8,10 @@ export class TesteController {
 
   @Post()
   async calcularPermutacao(
-    @Body() body: { arr: number[] },
+    @Body() body: { arr: number[]; tamanho: number },
   ): Promise<number[][]> {
-    const { arr } = body;
-    const resultado = this.testeservice.gerarPermutacoes(arr);
+    const { arr, tamanho } = body;
+    const resultado = this.testeservice.gerarArranjos(arr, tamanho);
     return resultado;
   }
 }

@@ -3,11 +3,13 @@ import calcularArranjo from "./services/calcularArranjo";
 
 function App() {
   const [number, setNumber] = useState<string>('');
+  const [tamanho, setTamanho] = useState<string>('0');
   const [array, setArray] = useState<number[]>([]);
-  const [items, setItems] = useState<number[][]>([]); // Alteração aqui: items é um array bidimensional
+  const [items, setItems] = useState<number[][]>([]); 
+
 
   const calcular = async () => {
-    const data = await calcularArranjo.obterArranjo(array);
+    const data = await calcularArranjo.obterArranjo(array,parseInt(tamanho));
     // Verifique se a resposta é um array bidimensional (array de arrays)
     if (Array.isArray(data) && Array.isArray(data[0])) {
       setItems(data); // Se for um array de arrays, armazene como está
@@ -29,6 +31,12 @@ function App() {
       </div>
 
       <div className="container">
+      <input
+          value={tamanho}
+          onChange={(e) => setTamanho(e.target.value)}
+          placeholder="Entre com  o tamanho"
+          type="number"
+        />
         <input
           value={number}
           onChange={(e) => setNumber(e.target.value)}
@@ -40,6 +48,7 @@ function App() {
             if (number) {
               setArray([...array, parseInt(number)]);
               setNumber(''); // Limpa o input após adicionar
+         
             }
           }}
         >
