@@ -1,4 +1,4 @@
-import { Controller, Get, Body } from '@nestjs/common';
+import { Controller, Get, Body, HttpStatus } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Post } from '@nestjs/common';
 
@@ -14,8 +14,15 @@ export class AppController {
   @Post()
   async calcularPermutacao(
     @Body() body: { arr: number[]; tamanho: number },
-  ): Promise<number[][]> {
+  ): Promise<number[][] | any> {
     const { arr, tamanho } = body;
+    if (tamanho > arr.length) {
+      return {
+        status: HttpStatus.BAD_REQUEST, // Erro 400 caso o tamanho seja maior que o número de elementos no array
+        mensagem:
+          'O tamanho não pode ser maior que o número de elementos no array.',
+      };
+    }
     const resultado = this.appService.gerarArranjos(arr, tamanho);
     return resultado;
   }
